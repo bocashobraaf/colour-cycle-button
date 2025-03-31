@@ -3,15 +3,24 @@ import './App.css';
 import ColourGradient from './ColourGradient';
 import FilmGrain from './FilmGrain';
 
-// Colour cycle button that uses the provided button colour and triggers a palette cycle
-const ColourCycleButton = ({ buttonColor, onCycle }) => {
+// React functional button component that cycles through an array of colours passed as a prop.
+const ColourCycleButton = ({ colors, onColorChange }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleClick = () => {
+    const nextIndex = (currentIndex + 1) % colors.length;
+    setCurrentIndex(nextIndex);
+    // Notify parent of the new index/color if a callback is provided
+    if (onColorChange) {
+      onColorChange(colors[nextIndex], nextIndex);
+    }
+  };
+
   return (
     <button
-      onClick={onCycle}
+      onClick={handleClick}
       className="colourCycleBtn"
-      style={{
-        backgroundColor: buttonColor,
-      }}
+      style={{ backgroundColor: colors[currentIndex] }}
     >
       Click me
     </button>
@@ -43,12 +52,13 @@ function App() {
     }
   ];
 
+  // We use the button colour index to choose the current palette for the gradient background.
   const [currentPaletteIndex, setCurrentPaletteIndex] = useState(0);
   const currentPalette = palettes[currentPaletteIndex];
 
-  // When the button is clicked, cycle to the next palette.
-  const cyclePalette = () => {
-    setCurrentPaletteIndex((prevIndex) => (prevIndex + 1) % palettes.length);
+  // Callback to update the current palette index when the button cycles colours.
+  const handleColorChange = (newColor, newIndex) => {
+    setCurrentPaletteIndex(newIndex);
   };
 
   return (
@@ -61,8 +71,7 @@ function App() {
       }}
     >
       {/* 
-        The moving gradient background which changes the colour 
-        palette as the button colour changes 
+        The moving gradient background changes as the button's colour (and palette) changes 
       */}
       <ColourGradient
         dominantColors={currentPalette.gradient}
@@ -81,7 +90,14 @@ function App() {
         <div className="colourContainerTop">
           I have used some design principles I developed at my e-commerce startup, taizte.com
         </div>
-        <ColourCycleButton buttonColor={currentPalette.button} onCycle={cyclePalette} />
+        {/* 
+          Pass the array of button colours extracted from the palettes 
+          to the ColourCycleButton as required.
+        */}
+        <ColourCycleButton
+          colors={palettes.map(palette => palette.button)}
+          onColorChange={handleColorChange}
+        />
       </div>
     </div>
   );
