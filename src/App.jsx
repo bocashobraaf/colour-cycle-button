@@ -3,7 +3,7 @@ import './App.css';
 import ColourGradient from './ColourGradient';
 import FilmGrain from './FilmGrain';
 
-// A simple button that uses the provided button colour and triggers a palette cycle
+// Colour cycle button that uses the provided button colour and triggers a palette cycle
 const ColourCycleButton = ({ buttonColor, onCycle }) => {
   return (
     <button
@@ -19,7 +19,7 @@ const ColourCycleButton = ({ buttonColor, onCycle }) => {
 };
 
 function App() {
-  // Define an array of palettes
+  // Array of colour palettes
   const palettes = [
     { 
       button: "#E6F14A", 
@@ -60,7 +60,10 @@ function App() {
         overflow: 'hidden'
       }}
     >
-      {/* The moving gradient background (z-index defaults to 0) */}
+      {/* 
+        The moving gradient background which changes the colour 
+        palette as the button colour changes 
+      */}
       <ColourGradient
         dominantColors={currentPalette.gradient}
         visible={true}
@@ -71,11 +74,10 @@ function App() {
         page="app"
       />
 
-      {/* FilmGrain overlay placed above the gradient */}
+      {/* FilmGrain overlay */}
       <FilmGrain />
 
-      {/* UI container above both the background and film grain */}
-      <div className="colourContainer" style={{ position: 'relative', zIndex: 2 }}>
+      <div className="colourContainer">
         <div className="colourContainerTop">
           I have used some design principles I developed at my e-commerce startup, taizte.com
         </div>
