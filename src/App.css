@@ -1,5 +1,13 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  font-family: 'Poppins';
+  width: 100vw;
+  height: 100vh;
+  top: 0;
 }
 
 .App-logo {
@@ -35,4 +43,71 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.colourContainer {
+  border-radius: 20px;
+  gap: 10px;
+  font-family: 'Poppins';
+  z-index: 1002;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: fit-content;
+
+
+  padding: 10px;
+  width: fit-content;
+  font-family: 'Poppins';
+  width: 320px;
+
+  border: solid rgba(255, 255, 255, 0.1) 2px;
+  background: rgba(255, 255, 255, 0.5);
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  cursor: pointer;
+}
+
+.colourContainerTop {
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.colourCycleBtn {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  font-family: 'Poppins';
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  border: none;
+}
+
+.colourCycleBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.colourBodyGradientCanvas {
+  height: 105vh;
+  width: 110vw;
+  
+  display: block;
+  position: absolute;
+  top: -2vh;
+  left: -5vw;
+
+  margin: 0;
+  filter: blur(15px);
+  
+  background: #FFFFFF;
+  z-index: -1;
 }
